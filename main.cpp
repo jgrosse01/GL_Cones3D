@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
     glutInitWindowSize(width, height);
     glutInitWindowPosition(150, 150);
-    glutCreateWindow("Ted... Where is my cone?");
+    glutCreateWindow("Ted... WHY ARE MY CONES NOT COLORED?!?");
 
     init();
 

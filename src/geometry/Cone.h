@@ -14,7 +14,7 @@ private:
     Color* defaultColor;
 
 public:
-    Cone(int x = 0, int y = 0, int z = 0, int radius=2, int height = 4, Color* color = new Color(0,255,255));
+    explicit Cone(int x = 0, int y = 0, int z = 0, int radius=2, int height = 4, Color* color = new Color(0,255,255));
     void draw(Color* color);
     void move(int dx, int dy, int dz);
     void resize(int dRad, int dHeight);
