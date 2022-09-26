@@ -18,7 +18,7 @@ void init() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(100,16/9.0,1,100);
+    gluPerspective(100,width/(height*1.0),1,100);
     gluLookAt(0,5,5,0,0,0,0,0,1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -40,15 +40,17 @@ void display() {
 void idle() {}
 
 void reshape(int x, int y) {
+    width = glutGet(GLUT_WINDOW_WIDTH);
+    height = glutGet(GLUT_WINDOW_HEIGHT);
     glClearColor(0,0,0,0);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(90,16/9.0,1,100);
+    gluPerspective(100,width/(height*1.0),1,100);
     gluLookAt(0,5,5,0,0,0,0,0,1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glViewport(0,0,glutGet(GLUT_WINDOW_WIDTH),glutGet(GLUT_WINDOW_HEIGHT));
+    glViewport(0,0,width,height);
 }
 
 int main(int argc, char** argv) {
