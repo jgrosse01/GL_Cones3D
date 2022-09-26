@@ -17,17 +17,21 @@ Cone::Cone(int x, int y, int z, int radius, int height, Color* color) {
     this->facing = temp;
 }
 
-void Cone::draw() {
+void Cone::draw(Color* color) {
     float x, y;
     glBegin(GL_TRIANGLE_FAN);
-    glColor3f(0,1,0);
+    glColor3ub(0,255,0);
     glVertex3f(xOff, yOff, zOff+height);
 
     for (int i = 0; i <= 40; i++) {
         x = cos(M_PI/20*i)*baseRadius + xOff;
         y = sin(M_PI/20*i)*baseRadius + yOff;
 
-        glColor3f(this->defaultColor->getRed(), this->defaultColor->getGreen(), this->defaultColor->getBlue());
+        if (color == nullptr) {
+            glColor3ub(defaultColor->getRed(), defaultColor->getGreen(), defaultColor->getBlue());
+        } else {
+            glColor3ub(color->getRed(), color->getGreen(), color->getBlue());
+        }
         glVertex3f(x,y,zOff);
     }
     glEnd();

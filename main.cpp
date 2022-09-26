@@ -29,8 +29,8 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
 
-    cone1.draw();
-    cone2.draw();
+    cone1.draw(new Color(255,0,0));
+    cone2.draw(new Color(0,255,0));
 
 
     glutSwapBuffers();
