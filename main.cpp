@@ -10,13 +10,16 @@ float eyeX = 0.0f, eyeY = 5.0f, eyeZ = 5.0f;
 
 // lighting stuff
 GLfloat light_position[] = {20.0,1.0,1.0,0.0};
-GLfloat light_color[] = {0.7, 0.1, 0.1, 0.0};
+GLfloat light_color[] = {0.35, 0.35, 0.35, 0.0};
 GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
 
 Cone cone1 = Cone(0,0,0, 3);
 Cone cone2 = Cone(-8,0,0, 1);
 
+float theta = 0.0f;
+
 void init() {
+
     glClearColor(0,0,0,0);
 
     glLightfv(GL_LIGHT0, GL_DIFFUSE,light_color);
@@ -25,6 +28,7 @@ void init() {
 
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHTING);
+    glEnable(GL_COLOR_MATERIAL);
 
     glEnable(GL_DEPTH_TEST);
 
@@ -43,11 +47,15 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-
-
+    glRotated(theta, 0,0,1);
     cone1.draw(nullptr);
-    cone2.draw(nullptr);
+    glLoadIdentity();
 
+    glRotated(theta, 1,0,0);
+    cone2.draw(nullptr);
+    glLoadIdentity();
+
+    glRotated(-theta, 0,0,1);
     //drawing rectangle under cones
     glBegin(GL_QUADS);
     glNormal3f(0.0, 1.0, 0.0);
@@ -57,6 +65,7 @@ void display() {
     glVertex3i(-3,-3,0);
     glVertex3i(-3,3,0);
     glEnd();
+    glLoadIdentity();
 
 
 
@@ -64,7 +73,12 @@ void display() {
     glFlush();
 }
 
-void idle() {}
+void idle() {
+    theta += 1.0f;
+    if (theta >= 360.0f)
+        theta -= 360.0f;
+    glutPostRedisplay();
+}
 
 void reshape(int x, int y) {
     width = glutGet(GLUT_WINDOW_WIDTH);
