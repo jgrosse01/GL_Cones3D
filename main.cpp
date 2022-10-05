@@ -19,6 +19,8 @@ Cone cone2 = Cone(-8,0,0, 1);
 float theta = 0.0f;
 
 void init() {
+    cone1.setRotation(0,0,0.2f);
+    cone2.setRotation(0.3f, 0, 0);
 
     glClearColor(0,0,0,0);
 
@@ -47,15 +49,10 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glRotated(theta, 0,0,1);
     cone1.draw(nullptr);
-    glLoadIdentity();
 
-    glRotated(theta, 1,0,0);
     cone2.draw(nullptr);
-    glLoadIdentity();
 
-    glRotated(-theta, 0,0,1);
     //drawing rectangle under cones
     glBegin(GL_QUADS);
     glNormal3f(0.0, 1.0, 0.0);
@@ -65,7 +62,6 @@ void display() {
     glVertex3i(-3,-3,0);
     glVertex3i(-3,3,0);
     glEnd();
-    glLoadIdentity();
 
 
 
@@ -74,10 +70,7 @@ void display() {
 }
 
 void idle() {
-    theta += 1.0f;
-    if (theta >= 360.0f)
-        theta -= 360.0f;
-    glutPostRedisplay();
+   glutPostRedisplay();
 }
 
 void reshape(int x, int y) {

@@ -15,6 +15,7 @@ static GLfloat defaultShiny[1] = {80.0f};
 class Cone {
 private:
     int xOff, yOff, zOff, baseRadius, height;
+    float xrot, yrot, zrot, dxrot, dyrot, dzrot;
     std::vector<float> facing;
     // the color of the cone, used by default for the draw method
     Color* defaultColor;
@@ -28,6 +29,7 @@ public:
     void resize(int dRad, int dHeight);
     void changeDefaultColor(Color* color);
     void rotate(float xRot, float yRot, float zRot);
+    void setRotation(float xRot, float yRot, float zRot);
     GLfloat * surfaceNormal();
 };
 

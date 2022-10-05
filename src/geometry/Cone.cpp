@@ -22,6 +22,10 @@ Cone::Cone(int x, int y, int z, int radius, int height, Color* color, GLfloat* s
 
 void Cone::draw(Color* color) {
     float x, y, r, b;
+    // rotation stuff
+    glRotated(xrot, 1, 0, 0);
+    glRotated(yrot, 0, 1, 0);
+    glRotated(zrot, 0, 0, 1);
     // draw cones now
     glBegin(GL_TRIANGLE_FAN);
     // set material light properties
@@ -48,6 +52,12 @@ void Cone::draw(Color* color) {
         glVertex3f(x,y,zOff);
     }
     glEnd();
+
+    glLoadIdentity();
+
+    xrot += dxrot;
+    yrot += dyrot;
+    zrot += dzrot;
 }
 
 void Cone::move(int dx, int dy, int dz) {
@@ -63,7 +73,15 @@ void Cone::changeDefaultColor(Color* color) {
 }
 
 void Cone::rotate(float xRot, float yRot, float zRot) {
+    this->xrot = xRot;
+    this->yrot = yRot;
+    this->zrot = zRot;
+}
 
+void Cone::setRotation(float xRot, float yRot, float zRot) {
+    this->dxrot = xRot;
+    this->dyrot = yRot;
+    this->dzrot = zRot;
 }
 
 GLfloat * Cone::surfaceNormal() {
