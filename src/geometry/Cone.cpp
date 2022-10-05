@@ -47,7 +47,7 @@ void Cone::draw(Color* color) {
             glColor3f(r, 0, b);
         } else {
             //glColor3ub(color->getRed(), color->getGreen(), color->getBlue());
-            glColor3ub(255,0,0);
+            glColor3ub(0,255,0);
         }
         glVertex3f(x,y,zOff);
     }

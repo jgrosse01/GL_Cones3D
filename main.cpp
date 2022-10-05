@@ -10,7 +10,7 @@ float eyeX = 0.0f, eyeY = 5.0f, eyeZ = 5.0f;
 
 // lighting stuff
 GLfloat light_position[] = {20.0,1.0,1.0,0.0};
-GLfloat light_color[] = {0.35, 0.35, 0.35, 0.0};
+GLfloat light_color[] = {1.0, 1.0, 1.0, 0.0};
 GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
 
 Cone cone1 = Cone(0,0,0, 3);
@@ -24,6 +24,8 @@ void init() {
 
     glClearColor(0,0,0,0);
 
+    glMatrixMode(GL_MODELVIEW);
+
     glLightfv(GL_LIGHT0, GL_DIFFUSE,light_color);
     glLightfv(GL_LIGHT0, GL_POSITION,light_position);
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
@@ -31,9 +33,11 @@ void init() {
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_NORMALIZE);
 
     glEnable(GL_DEPTH_TEST);
 
+    glMatrixMode(GL_PROJECTION);
     glViewport(0,0,width,height);
 }
 
@@ -49,9 +53,9 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    cone1.draw(nullptr);
+    cone1.draw(new Color(255,0,0));
 
-    cone2.draw(nullptr);
+    cone2.draw(new Color(255,0,0));
 
     //drawing rectangle under cones
     glBegin(GL_QUADS);
@@ -92,7 +96,9 @@ void reshape(int x, int y) {
 
 void processKeys(int key, int x, int y) {
     switch (key) {
-        case 27: exit(0);
+        case 27:
+            exit(0);
+            break;
         case 87:
             eyeY += 5.0f;
             glutPostRedisplay();
